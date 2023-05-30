@@ -31,6 +31,10 @@ router.post("/todo", (req: Request, res: Response) => {
     }
     const tarefa = req.body.tarefa;
 
+    // if(tarefa === ""){
+    //   throw "Descrição da tarefa não fornecida";
+    // }
+
     // SIMULAÇÃO UMA INSERÇÃO NO BANCO DE DADOS
     // novoId é 1 se o banco está vazio, ou 1 a mais que o ID da última tarefa do banco
     const novoId = (tarefas[tarefas.length - 1]?.id || 0) + 1;
