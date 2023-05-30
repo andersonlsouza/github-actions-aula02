@@ -8,7 +8,7 @@ router.use(Express.json());
 router.use(Express.urlencoded({ extended: true }));
 
 // ----- ROTAS ------
-router.get("/", (req: path, res: path) => {
+router.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../public", "index.html"));
 });
 
@@ -30,6 +30,10 @@ router.post("/todo", (req: Request, res: Response) => {
       throw "formato de requisição incorreto :(";
     }
     const tarefa = req.body.tarefa;
+
+    // if(tarefa === ""){
+    //   throw "Descrição da tarefa não fornecida";
+    // }
 
     // SIMULAÇÃO UMA INSERÇÃO NO BANCO DE DADOS
     // novoId é 1 se o banco está vazio, ou 1 a mais que o ID da última tarefa do banco

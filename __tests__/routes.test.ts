@@ -41,6 +41,18 @@ describe("POST /todo", () => {
       },
     ]);
   });
+
+  it("Should throw error when description is not avaliable", async () => {
+    const response = await request.post("/todo").send({ tarefa: "" });
+
+    expect(response.status).toBe(400);
+
+    expect(response.body).toEqual({
+      erro: "formato de requisição incorreto :(",
+    });
+
+    expect(tarefas).toEqual([]);
+  });
 });
 
 describe("DELETE /todo/:id", () => {
@@ -60,6 +72,25 @@ describe("DELETE /todo/:id", () => {
       {
         id: 11,
         descricao: "tarefa teste 2",
+      },
+    ]);
+  });
+
+  it("should not delete when an id is not exists", async () => {
+    tarefas.push({ id: 10, descricao: "tarefa teste 1" });
+
+    const response = await request.delete("/todo/12");
+
+    expect(response.status).toBe(404);
+
+    expect(response.body).toEqual({
+      mensagem: `ID não encontrado!`,
+    });
+
+    expect(tarefas).toEqual([
+      {
+        id: 10,
+        descricao: "tarefa teste 1",
       },
     ]);
   });
