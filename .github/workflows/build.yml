@@ -1,14 +1,6 @@
 name: Build
 
-on:
-  push:
-    branches:
-      - main
-      - build_error
-  pull_request:
-    branches:
-      - main
-      - build_error
+on: [push, pull_request]
 
 jobs:
   build:
